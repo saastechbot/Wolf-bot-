@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  wolf-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wolf-bot
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_ENABLED=${TELEGRAM_ENABLED:-true}
+      - WHATSAPP_ENABLED=${WHATSAPP_ENABLED:-false}
+      - PORT=3000
+      - HOST=0.0.0.0
+      - PREFIX=${PREFIX:-!}
+      - OWNER_NUMBER=${OWNER_NUMBER}
+      - OWNER_TELEGRAM=${OWNER_TELEGRAM}
+      - AUTO_REPLY=${AUTO_REPLY:-true}
+      - LOG_LEVEL=${LOG_LEVEL:-error}
+    volumes:
+      - ./auth:/app/auth
+      - ./logs:/app/logs
+      - ./data:/app/data
+    networks:
+      - wolf-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"] 
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+networks:
+  wolf-network:
+    driver: bridge
+
+volumes:
+  auth:
+  logs:
+  data:

@@ -1,27 +1,31 @@
 {
-  "name": "simon-pair-bot",
+  "name": "wolf-bot",
   "version": "1.0.0",
-  "description": "A powerful WhatsApp bot built with Baileys. Supports commands like ping, menu, auto replies, and more.",
+  "description": "Simon-tech is a powerful WhatsApp bot built with Baileys. It supports commands like ping, menu, auto replies, and more.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "whatsapp",
     "bot",
     "baileys",
-    "telegram"
+    "telegram",
+    "automation"
   ],
   "author": "saastechbot",
   "license": "MIT",
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.4.0",
+    "node-telegram-bot-api": "^0.64.0",
+    "@whiskeysockets/baileys": "^6.5.0",
+    "pino": "^8.17.2",
+    "express": "^4.18.2",
     "qrcode-terminal": "^0.12.0",
-    "dotenv": "^16.0.3",
-    "pino": "^8.0.0"
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.2"
   }
 }
